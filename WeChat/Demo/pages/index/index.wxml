@@ -1,0 +1,142 @@
+<view class="container">
+  <!-- 滚动菜单 -->
+  <view>
+    <scroll-view class="backgroun-scroll" scroll-x>
+      <view class="nav">
+        <navigator url="">国际新闻</navigator>
+        <navigator url="">国内新闻</navigator>
+        <navigator url="">社会新闻</navigator>
+        <navigator url="">娱乐新闻</navigator>
+        <navigator url="">财经新闻</navigator>
+        <navigator url="">科技新闻</navigator>
+      </view>
+    </scroll-view>
+  </view>
+  <!-- 搜索栏 -->
+  <view class="search"></view>
+  <!-- 轮播图 -->
+  <view class="ads">
+    <swiper class="for-tu" autoplay>
+      <swiper-item>
+        <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1584955175526&di=8ae3e9eb7daea47748574dbcc609d6d6&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201901%2F25%2F20190125145124_yadNR.jpeg"></image>
+      </swiper-item>
+      <swiper-item>
+        <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1584955256164&di=4ec324e226919a96ea1e54c054a3374e&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F4%2F53a2aed9209ee.jpg"></image>
+      </swiper-item>
+      <swiper-item>
+        <image src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3775869914,47139070&fm=26&gp=0.jpg"></image>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <!-- 导航菜单 -->
+  <view class="outer-view">
+    <view class="inner-view">
+      <navigator url="#">
+        <image src="/icon/user.png"></image>
+        <view class="inner-fnt">用户</view>
+      </navigator>
+    </view>
+    <view class="inner-view">
+      <navigator url="#">
+        <image src="/icon/cloud.png"></image>
+        <view class="inner-fnt">云盘</view>
+      </navigator>
+    </view>
+    <view class="inner-view">
+      <navigator url="#">
+        <image src="/icon/brand.png"></image>
+        <view class="inner-fnt">品牌</view>
+      </navigator>
+    </view>
+    <view class="inner-view">
+      <navigator url="#">
+        <image src="/icon/time.png"></image>
+        <view class="inner-fnt">秒杀</view>
+      </navigator>
+    </view>
+    <view class="inner-view">
+      <navigator url="#">
+        <image src="/icon/hardDisk.png"></image>
+        <view class="inner-fnt">内存</view>
+      </navigator>
+    </view>
+  </view>
+
+  <!-- 动态导航 -->
+  <view>
+    <scroll-view scroll-x>
+      <view class="scroll-view">
+        <view class="inner-view margin20">
+          <navigator url="#">
+            <image src="/icon/user.png"></image>
+            <view class="inner-fnt">用户</view>
+          </navigator>
+        </view>
+
+        <view class="inner-view margin20">
+          <navigator url="#">
+            <image src="/icon/user.png"></image>
+            <view class="inner-fnt">用户</view>
+          </navigator>
+        </view>
+
+        <view class="inner-view margin20">
+          <navigator url="#">
+            <image src="/icon/user.png"></image>
+            <view class="inner-fnt">用户</view>
+          </navigator>
+        </view>
+
+        <view class="inner-view margin20">
+          <navigator url="#">
+            <image src="/icon/user.png"></image>
+            <view class="inner-fnt">用户</view>
+          </navigator>
+        </view>
+
+        <view class="inner-view margin20">
+          <navigator url="#">
+            <image src="/icon/user.png"></image>
+            <view class="inner-fnt">用户</view>
+          </navigator>
+        </view>
+
+        <view class="inner-view margin20">
+          <navigator url="#">
+            <image src="/icon/user.png"></image>
+            <view class="inner-fnt">用户</view>
+          </navigator>
+        </view>
+
+        <view class="inner-view margin20">
+          <navigator url="#">
+            <image src="/icon/user.png"></image>
+            <view class="inner-fnt">用户</view>
+          </navigator>
+        </view>
+
+        <view class="inner-view margin20">
+          <navigator url="#">
+            <image src="/icon/user.png"></image>
+            <view class="inner-fnt">用户</view>
+          </navigator>
+        </view>
+
+        <view class="inner-view margin20">
+          <navigator url="#">
+            <image src="/icon/user.png"></image>
+            <view class="inner-fnt">用户</view>
+          </navigator>
+        </view>
+
+        <view class="inner-view margin20">
+          <navigator url="#">
+            <image src="/icon/user.png"></image>
+            <view class="inner-fnt">用户</view>
+          </navigator>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

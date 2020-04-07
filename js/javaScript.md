@@ -1,0 +1,164 @@
+### DOM
+* 增
+    document.createElement(); 创建元素节点
+    document.createTextNode(); 创建文本节点
+    document.createComment(); 创建注释节点
+    document.createDocumentFragment();  创建文档碎片节点
+    ```
+    var div = document.createElement('div');
+    var text = document.createTextNode('邓宝宝');
+    var comment = document.createComment('this is Comment');
+    ```
+* 插
+    PARENTNODE.appendChild(); 可以理解为push
+    ```
+    var div = document.createElement('div');
+    document.body.appendChild(div);
+    var text = document.createTextNode('邓宝宝');
+    var span = document.createElement('span');
+    div.appendChild(text);
+    div.appendChild(span);
+    var text1 = document.createTextNode('demo');
+    span.appendChild(text1);
+    span.appendChild(text);
+    ```
+    PARENTNODE.insertBefore(a, b);一定是div先insert a，before b
+    ```
+    var strong = document.createElement('strong');
+    div.insertBefore(strong, span);
+    var i = document.createElement('i');
+    div.insertBefore(i, strong);
+    ```
+* 删
+    parent.removeChild(); 就是把它进行了剪切操作
+    child.remove(); 自尽，完全删除
+    ```
+    div.removeChild(i);
+    i.remove();
+    ```
+* 替换
+    parentNode.replaceChild(new, origin);   用新的new去置换旧的origin
+    ```
+    var p = document.createElement('p');
+    div.replaceChild(p, strong);
+    // 不过strong标签还存在，只不过是被剪切
+    ```
+
+### DOM基本操作
+* element节点的一些属性
+    innerHTML
+    innerText(火狐不兼容)/textContent(老版本IE不好使)
+* Element节点的一些方法
+    ele.setAttribute()
+    ele.getAttribute()
+
+### 日期对象Date（）
+
+日期对象，是系统提供好的
+var date = new Date()大写的Date是系统提供的一个构造函数，通过new Date的方法会给我们返回一个对象，这个对象就是一个日期对象。日期对象有很多属性和方法。小的date代表此时此刻的时间。用小的date调用方法，如date.getDate()
+
+* Date对象属性
+
+* Date对象方法
+    Date():返回当日的日期和时间
+    getDate():从Date对象返回一个月中的某一天（1~31）
+    getDay():从Date对象返回一周中的某一天（0~6)
+    getMonth():从Date对象返回月份(0~11)
+    getFuYear():从Date对象以四位数字返回年份
+    getHours():返回Date对象的小时（0~23）
+    getMinutes():返回Date对象的分钟（0~59）
+    getSeconds()：返回Date对象的秒数（0~59）
+    getMilliseconds():返回Date对象的毫秒（0~999）
+    getTime():返回1970年1月1日（计算机纪元时刻）至今的毫秒数
+    setDate():设置Date对象中月的某一天（1~31）
+    setMonth():设置Date对象中月份（0~11）
+    setFullYear():设置Date对象中的年份（四位数字）
+    setHours():设置Date对象中的小时（0~23）
+    setMinutes(): 设置Date对象中的分钟(0~59)
+    setSeconds(): 设置Date对象中的秒钟(0~59)
+    setMilliseconds(): 设置Date对象的毫秒（0~999）
+    setTime(): 以毫秒设置Date对象
+    toString(): 把Date对象转换为字符串
+    toTimeString(): 把Date对象的时间部分转换为字符串
+    toDateString(): 把Date对象的日期部分转换为字符串
+<br>
+* 定时器
+    * setInterval():定时器
+        setInterval(function() {},1000);指每隔1000毫秒执行一次这个函数
+
+        如果先定义1000毫秒，在后面改成2000毫秒，程序仍按1000毫秒执行，因为它只识别一次，不能通过改变time来改变setInterval的快慢 
+        ```
+        var time = 1000;
+        setInterval(function(){
+            console.log('a');
+        }, time);
+        time = 2000;
+        ```
+        setInterval 计算时间非常不准
+        ```
+        var firstTime = new Date().getTime();
+        setInterval(function() {
+            var lastTime = new Date().getTime();
+            console.log(lastTime - firstTime);
+            firstTime = lastTime;
+        }, 1000);
+        ```
+
+        <em> 注意</em>：setInterval();是 window 的方法，在全局上就算不写 window. setInterval();他也会上全局的 GO 里面查找，所以不写 window.也行。每一个 setInterval();都会返回一个一个数字，作为唯一的标识，有唯一标识就可以把他清除掉（利用 clearInterval 清除)
+    <br>
+    * clearInterval():能让setInterval停止
+        ```
+        var i = 0;
+        var timer = setInterval(function() {
+            console.log(i++)
+            if(i > 10 ) {
+                clearInterval(timer);
+            }
+        }, 10);
+        ```
+
+    * setTimeout():真正的定时器，隔了一段时间后再执行（起推迟作用），并且只执行一次
+
+        ```
+        setTimeout(function() {
+            console.log('a');
+        }, 1000);
+        ```
+
+    * clearTimeout() 清除setTimeout();让它停止执行
+
+        ```
+        var timer = setTimeout(function() {
+            console.log('a');
+        }, 1000);
+        clearTimeout(timer);
+        这种写法，setTimeout()还没执行就被清除了，执行不了
+        ```
+    timer1=setTimeout()返回的唯一标识和setInterval返回的唯一标识是不会重叠的，他们两个是依次有序的
+    ```
+    var timer1 = setTimeout(function() {
+    }, 1000);
+    // timer1 = 1
+    var timer2 = setInterval(function() {
+    }, 1000);
+    // timer2 = 2
+    ```
+    setInterval();setTimeout();clearInterval();clearTimeout();这四个都是全局对象，都是window上的方法，内部函数this指向window
+
+    setInterval('func()',1000)和setTimeout();都有另一种形式展现，里面可以写成字符串，例如“setInterval("console.log('a');", 1000),意思是1000毫秒执行一次console.log”。但是一般用function(){}
+
+### BOM
+
+* 查看滚动条的滚动距离
+    * window.pageXOffset：横向滚动条滚动距离
+    pageYOffset：纵向滚动条滚动距离
+    IE8及IE8以下不兼容
+    * document.body.scrollLeft,
+    documentElement.scrollLeft: 横向滚动条滚动距离
+    * document.body.scrollLeft,
+    documentElement.scrollLeft: 纵向滚动条滚动距离
+    
+    
+
+
+

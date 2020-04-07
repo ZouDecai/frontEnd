@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>   
+</body>
+<script>
+    //在try里面的发生错误，不会执行错误后的try里面的代码
+    /* try{
+
+    }catch(e){//error error.message error.name -->error
+
+    } */
+   /*  Error.name的六种值对应的信息
+    1、EvalError：eval()的使用与定义不一致
+    2、RangeError：数值越界
+    3、ReferenceError: 非法或不能识别的引用数值
+    4、SyntaxError：发生语法解析错误
+    5、TypeError：操作数类型错误
+    6、URIError: URI处理函数使用不当 */
+    // 浏览器使用的方法是基于es3.0+es5.0的新增方法使用的，如果es3.0与es5.0的方法产生冲突，浏览器会使用es3.0
+    // es5.0严格模式 那么es3.0和es5.0产生冲突的部分就是用es5.0 否则会用es3.0
+
+    //es5.0严格模式的启动
+    "use strict";
+    /* 不再兼容es3的一些不规则语法。使用全新的es5规范
+    两种用法:
+        全局严格模式
+        局部函数内严格模式（推荐）
+    就是一行字符串，不会对不兼容严格模式的浏览器产生影响
+    不支持with,arguments.callee,func,caller,变量赋值前必须声明，局部this必须被赋值(Person.call(null/undefined)赋值什么就是什么)，拒绝重复属性和参数
+     */
+     var obj = {
+         name: 'obj'
+     }
+     var name = 'window';
+     function test() {
+        var name = 'scope';
+        with(obj) {
+            console.log(name);
+        }
+        //with改变作用域链
+     }
+     test();
+</script>
+</html>

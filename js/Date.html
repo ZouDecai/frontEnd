@@ -1,0 +1,107 @@
+<!--
+ * @Author: zoudecai
+ * @Date: 2020-03-31 10:33:09
+ * @Last Modified by: zoudecai
+ * @Last Modified time: Do not edit
+ * @Description: Date
+ -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <style type="text/css">
+        input{
+            border: 1px solid rgba(0,0,0,0.8);
+            text-align: right;
+            font-size: 20px;
+            font-weight: bold;
+        }
+     </style>
+ </head>
+ <body>
+     minutes:<input type="text" value="0">
+     seconds:<input type="text" value="0">     
+ </body>
+ <script>
+ /* 
+    var date = new Date();
+    var firstTime = new Date().getTime();
+    for(var i = 0; i < 100000000; i++) {
+    }
+    var lastTime = new Date().getTime();
+    console.log(lastTime - firstTime); 
+*/
+/*  
+    date.setMinutes(39);
+    setInterval(function() {
+         if(new Date().getTime() - date.getTime() >1000) {
+             console.log('邹德财，开始工作')
+         }
+    }, 1000); 
+*/
+
+/* 
+    var time = 1000;
+    setInterval(function(){
+        console.log('a');
+    }, time);
+
+    var i = 0;
+    setInterval(function() {
+        i++;
+        console.log(i);
+    }, 1000);
+
+    var firstTime = new Date().getTime();
+    setInterval(function() {
+        var lastTime = new Date().getTime();
+        console.log(lastTime - firstTime);
+        firstTime = lastTime;
+    }, 1000);
+ */
+ /* 
+    var i = 0;
+    var timer = setInterval(function() {
+        console.log(i++)
+        if(i > 10 ) {
+            clearInterval(timer);
+        }
+    }, 10);
+  */
+
+/* 
+    setTimeout(function() {
+        console.log('a');
+    }, 1000);
+
+    var timer = setTimeout(function() {
+        console.log('a');
+    }, 1000);
+    clearTimeout(timer);
+
+    var timer1 = setTimeout(function() {
+    }, 1000);
+    var timer2 = setInterval(function() {
+    }, 1000);
+
+    setInterval("console.log('a')", 1000)
+ */
+ var minutesNode = document.getElementsByTagName('input')[0];
+ var secondsNode = document.getElementsByTagName('input')[1];
+ var minutes=0,seconds=0;
+ var timer = setInterval(function() {
+    seconds ++;
+    if(seconds == 60) {
+        seconds = 0;
+        minutes ++;
+    }
+    secondsNode.value = seconds;
+    minutesNode.value = minutes;
+    if (minutes == 3) {
+        clearInterval(timer);
+    }
+ }, 1000);
+ </script>
+ </html>

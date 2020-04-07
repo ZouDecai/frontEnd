@@ -1,0 +1,12 @@
+{
+  "compilerOptions": { //编译选项
+    "target": "es2016", //配置编译目标代码的版本标准
+    "module": "commonjs", //配置编译目标使用的模块化标准
+    "lib": ["es2016"],  //编译过程中需要引入的库文件的列表。
+    "outDir": "./dist",
+    "strictNullChecks":  true
+  },
+  "include": ["./src"] //编译的目标文件
+  // "files": [] 指定编译文件
+
+}

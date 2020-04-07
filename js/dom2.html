@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <div>
+        <p></p>
+        <b></b>
+        this is tag-->
+        <!-- this is strong tag -->
+        <!-- <strong>
+            <span>
+                <i></i>
+            </span>
+        </strong>
+        <span></span>
+        <address></address>
+    </div>  -->
+</body>
+<script type="text/javascript">
+/* 
+封装函数，返回元素e的第n层祖先元素
+<div>
+    <strong>
+        <span>
+            <i></i>
+        </span>
+    </strong>
+</div>
+ */
+/* 
+function retParent(elem, n){
+    while(elem && n) {
+        elem = elem.parentElement;
+        n--;
+    }
+    return elem;
+}
+var i = document.getElementsByTagName('i')[0];
+ */
+/* 
+    3.封装函数，返回元素 e 的第 n 个兄弟节点，n 为正，返回后面的兄弟节点，n 为负，
+返回前面的，n 为 0，返回自己。
+ */
+/* 
+function retSibling(e, n) {
+    while(e && n) {
+        if(n > 0) {
+            if (0 && e.nextElementSibling) {
+                e = e.nextElementSibling;
+            } else {
+                for(e = e.nextElementSibling; e && e.nodeType != 1; e = e.nextElementSibling);
+            }
+            n --;
+        } else {
+            if (e.previousElementSibling) {
+                e = e.previousElementSibling;
+            } else {
+                for(e = e.previousElementSibling; e && e.nodeType != 1; e = e.previousElementSibling);
+            }
+            n ++;
+        }
+    }
+    return e;
+}
+var strong = document.getElementsByTagName('strong')[0]; 
+*/
+/* 
+    编辑函数，封装 children 功能，解决以前部分浏览器的兼容性问题
+*/
+/*  Element.prototype.myChildren = function() {
+    var child = this.childNodes;
+    var len = child.length;
+    var arr = [];
+    for(var i = 0; i < len; i++){
+        if(child[i].nodeType == 1) {
+            arr.push(child[i]);
+        }
+    }
+    return arr;
+  }
+  var div = document.getElementsByTagName('div')[0];
+*/
+/* 
+  自己封装 hasChildren()方法，不可用 children 属性
+ */
+/*  
+    Element.prototype.myHasChildren = function() {
+        var child = this.childNodes;
+        var len = child.length;
+        for(var i = 0; i < len; i++) {
+            if(child[i].nodeType == 1){
+                return true;
+            }
+        }
+        return false
+    }
+    var i = document.getElementsByTagName('i')[0];
+*/
+
+// var text = document.createTextNode('邓宝宝');
+// var comment = document.createComment('this is Comment');
+
+// var div = document.getElementsByTagName('div')[0];
+/* var div = document.createElement('div');
+document.body.appendChild(div);
+var text = document.createTextNode('邓宝宝');
+var span = document.createElement('span');
+div.appendChild(text);
+div.appendChild(span);
+var text1 = document.createTextNode('demo');
+span.appendChild(text1);
+span.appendChild(text);
+
+var strong = document.createElement('strong');
+div.insertBefore(strong, span);
+var i = document.createElement('i');
+div.insertBefore(i, strong);
+
+div.removeChild(i);
+i.remove();
+
+var p = document.createElement('p');
+div.replaceChild(p, strong);
+
+div.innerHTML = 'DuYi'
+div.innerHTML = '<span style="background-color:red;">3256</span>'
+
+div.innerText="DuiYi"
+
+div.setAttribute('class','demo');
+div.setAttribute('id', 'only')
+
+div.getAttribute('id') */
+
+/* 
+    var div = document.createElement('div');
+    var p = document.createElement('p');
+    div.setAttribute('class', 'example');
+    p.setAttribute('class', 'slogan');
+    var text = document.createTextNode('最帅');
+    p.appendChild(text);
+    div.appendChild(p);
+    document.body.appendChild(div)
+ */
+ /* 
+    1.封装函数insertAfter();功能类似insertBefore();
+        <div>
+            <i></i>
+            <b></b>
+            <span></span>
+        </div>
+  */
+Element.prototype.insertAfter = function(targetNode, afterNode) {
+    var beforeNode = afterNode.nextElementSibling;
+    if (beforeNode == null) {
+        this.appendChild(targetNode);
+    } else {
+        this.insertBefore(targetNode, beforeNode);
+    }
+}
+
+/* 
+    将目标节点内部的节点顺序逆序
+    <div><a href="#"></a><em></em></div>
+    <div><em></em><a href="#"></a></div>
+ */
+
+</script>
+</html>

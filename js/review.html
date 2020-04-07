@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>   
+</body>
+<script>
+    /* 包装类
+    var str = "abc";
+    //new String('abc');
+    console.log(str.length);
+    var num = 123;
+    num.abc = 'abc';
+    //new Number(num).abc ="abc" --> delete
+    //
+    // new Number(num).abc
+    console.log(num.abc); */
+    // 原型与原型链
+    /* Person.prototype.lastName = 'deng';
+    function Person() {
+        // var this = {
+        // _proto_: Person.prototype
+        // }
+    }
+    var person = new Person();
+    console.log(person.lastName); */ 
+    // Object.create(prototype, definedProperty)
+    /* var demo = {
+        lastName: 'deng'
+    }
+    var obj = Object.create(demo);
+    obj = {
+        _proto_: demo
+    } */
+    /* 一旦经历了var的操作，所得出的属性，window,这种属性叫做不可配置的属性
+    不可配置的属性 delete 不掉 */
+    // test() ---> AO {
+    //     arguments: {},
+    //     this: {name: 'deng'},
+    //     num: undefined,
+    //     a: function(){}
+    // }
+    // 1、预编译 this ---> window
+    // 2、谁调用的this指向谁
+    // 3、call apply
+    // 4、全局 this --> window
+    /* function test() {
+        console.log(this);
+    }
+    test(); => test.call()
+    test.call ({name: 'deng'}); */
+    var name = 'window';
+    var obj = {
+        name: 'obj',
+        say: function () {
+            console.log(this.name);
+        }
+    }
+    // obj.say(); --> 'obj'
+    // obj.say.call(window); --> 'window'
+    // var fun = obj.say;fun() --> 'window'
+    // fun.call(obj); --->'obj'
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    function Student(name, age, sex) {
+        // var this = Object.create(Student.prototype);
+        Person.call(this, name, age);
+        this.sex = sex;
+    }
+    var student = new Student('cheng', 18, 'male');
+    // 闭包
+    /* var obj = {};
+    function a () {
+        var aa = 123;
+        function b() {
+            console.log(aa);
+        }
+        obj.fun = b;
+    }
+    a(); */
+    /* function Person(name){
+        // var this = {
+        //     makeMoney: function () {}
+        //     offer: function () {}
+        // }
+        var money = 100;
+        this.name = name;
+        this.makeMoney = function () {
+            money ++;
+        }
+        this.offer = function () {
+            money --;
+        }
+        // return this;
+    }
+    var person = new Person(); */
+    //习题
+    /* function Person(name, age, sex) {
+        var a = 0;
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+        function sss() {
+            a++;
+            document.write(a);
+        }
+        this.say = sss;
+    }
+    var oPerson = new Person();
+    oPerson.say(); 1
+    oPerson.say(); 2
+    var oPerson1 = new Person();
+    oPerson1.say(); 1 */
+    /* (function(x){
+        delete x;
+        return x;
+    })(1) --> 1 */
+    /* function test() {
+        console.log(typeof(arguments));
+        --> Object
+    }
+    test(); */
+    /* var h = function a () {
+        return 23;
+    };
+    console.log(typeof a()); 
+    error: a is not a defined;
+    */
+</script>
+</html>
