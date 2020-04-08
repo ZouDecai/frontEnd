@@ -158,7 +158,56 @@ var date = new Date()大写的Date是系统提供的一个构造函数，通过n
     * document.body.scrollLeft,
     documentElement.scrollLeft: 纵向滚动条滚动距离
     
-    
+* 查看视口的尺寸
+    * window.innerWidth/innerHeight  
+      IE8及IE8以下不兼容
+    **注意渲染模式：**   
+        - 1 标准模式：<！DOCTYPE html>是 html5 的
+        - 2 怪异/混杂模式：试图去兼容之前的语法，去掉<！DOCTYPE html>这一行即可开启（向后兼容）
+        - 3 document.compatMode 是用于判断是怪异模式还是标准模式的，如果是标准模式则返回"CSS1Compat",否则返回BackCompat(怪异模式向后兼容)
+    * document.documentElement.clientWidth/clientHeight
+        标准模式下，任意浏览器都兼容
+    * document.body.clientWidth/clientHeight
+        适用于怪异模式下的浏览器
+
+* 查看元素的几何尺寸
+    * domEle.getBoundingClientRect();
+    * 兼容性很好
+    * 该方法返回一个对象，对象里面有left,top,right,bottom等属性。left和top代表该元素左上角的x和Y坐标，right和bottom代表元素右下角的X和Y
+    * height和width属性老版本IE并未实现
+    * 返回的结果并不是"实时的"
+* 查看元素的尺寸
+    * dom.offsetWidth, dom.offsetHeight
+    所得值是视觉上的尺寸，是包括了 padding
+* 查看元素的位置
+    * dom.offsetLeft, dom.offsetTop
+        对于无定位父级的元素，返回相对文档的坐标。对于有定位父级返回相对于最近的有定位的父级的坐标
+    * dom.offsetParent
+        返回最近的有定位的父级，如无，返回body,body.offsetParent返回null
+* 让滚动条滚动
+    * window上有三个方法scroll(), scrollTo(),两个功能一样;scrollBy(),累加滚动距离
+        * scroll(x, y),scrollTo(x, y),功能是一样的，里面能填两个参数
+        * scroll(x轴滚动条的距离, y轴滚动条的距离)，里面的xy可以填负数
+        * scrollBy(x, y)是累加滚动距离，填负数就往上滚动
+    * 三个方法功能类似，用法都是将x,y坐标传入。即实现让滚轮滚动到当前位置。
+    * 区别：scrollBy()会在之前的数据基础之上做累加
+
+### 脚本化CSS
+* 读写元素CSS属性
+    * dom.style.prop
+        * 可读写行间样式，没有兼容性问题，碰到float这样的保留字属性，前面应加css
+        eg:float——> cssFloat
+        ```
+            div.style.float => div.style.cssFloat
+        ```
+        * 复合属性尽量拆解，组合单词变成小驼峰式写法
+        ```
+            div.style.border="2px solid black";
+            可以转换成
+            div.style.borderWidth="5px";
+            div.style.borderStyle="double"
+        ```
+        * 写入的值必须是字符串格式
 
 
 
