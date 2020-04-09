@@ -1,8 +1,12 @@
 ### DOM
 * 增
+<br>
     document.createElement(); 创建元素节点
+    <br>
     document.createTextNode(); 创建文本节点
+    <br>
     document.createComment(); 创建注释节点
+    <br>
     document.createDocumentFragment();  创建文档碎片节点
     ```
     var div = document.createElement('div');
@@ -10,6 +14,7 @@
     var comment = document.createComment('this is Comment');
     ```
 * 插
+<br>
     PARENTNODE.appendChild(); 可以理解为push
     ```
     var div = document.createElement('div');
@@ -30,6 +35,7 @@
     div.insertBefore(i, strong);
     ```
 * 删
+<br>
     parent.removeChild(); 就是把它进行了剪切操作
     child.remove(); 自尽，完全删除
     ```
@@ -37,6 +43,7 @@
     i.remove();
     ```
 * 替换
+<br>
     parentNode.replaceChild(new, origin);   用新的new去置换旧的origin
     ```
     var p = document.createElement('p');
@@ -46,46 +53,73 @@
 
 ### DOM基本操作
 * element节点的一些属性
+<br>
     innerHTML
+    <br>
     innerText(火狐不兼容)/textContent(老版本IE不好使)
 * Element节点的一些方法
+<br>
     ele.setAttribute()
+    <br>
     ele.getAttribute()
 
 ### 日期对象Date（）
-
 日期对象，是系统提供好的
+<br>
 var date = new Date()大写的Date是系统提供的一个构造函数，通过new Date的方法会给我们返回一个对象，这个对象就是一个日期对象。日期对象有很多属性和方法。小的date代表此时此刻的时间。用小的date调用方法，如date.getDate()
 
 * Date对象属性
 
 * Date对象方法
+    <br>
     Date():返回当日的日期和时间
+    <br>
     getDate():从Date对象返回一个月中的某一天（1~31）
+    <br>
     getDay():从Date对象返回一周中的某一天（0~6)
+    <br>
     getMonth():从Date对象返回月份(0~11)
+    <br>
     getFuYear():从Date对象以四位数字返回年份
+    <br>
     getHours():返回Date对象的小时（0~23）
+    <br>
     getMinutes():返回Date对象的分钟（0~59）
+    <br>
     getSeconds()：返回Date对象的秒数（0~59）
+    <br>
     getMilliseconds():返回Date对象的毫秒（0~999）
+    <br>
     getTime():返回1970年1月1日（计算机纪元时刻）至今的毫秒数
+    <br>
     setDate():设置Date对象中月的某一天（1~31）
+    <br>
     setMonth():设置Date对象中月份（0~11）
+    <br>
     setFullYear():设置Date对象中的年份（四位数字）
+    <br>
     setHours():设置Date对象中的小时（0~23）
+    <br>
     setMinutes(): 设置Date对象中的分钟(0~59)
+    <br>
     setSeconds(): 设置Date对象中的秒钟(0~59)
+    <br>
     setMilliseconds(): 设置Date对象的毫秒（0~999）
+    <br>
     setTime(): 以毫秒设置Date对象
+    <br>
     toString(): 把Date对象转换为字符串
+    <br>
     toTimeString(): 把Date对象的时间部分转换为字符串
+    <br>
     toDateString(): 把Date对象的日期部分转换为字符串
+    <br>
 <br>
 * 定时器
     * setInterval():定时器
+        <br>
         setInterval(function() {},1000);指每隔1000毫秒执行一次这个函数
-
+        <br>
         如果先定义1000毫秒，在后面改成2000毫秒，程序仍按1000毫秒执行，因为它只识别一次，不能通过改变time来改变setInterval的快慢 
         ```
         var time = 1000;
@@ -144,23 +178,26 @@ var date = new Date()大写的Date是系统提供的一个构造函数，通过n
     // timer2 = 2
     ```
     setInterval();setTimeout();clearInterval();clearTimeout();这四个都是全局对象，都是window上的方法，内部函数this指向window
-
+    <br>
     setInterval('func()',1000)和setTimeout();都有另一种形式展现，里面可以写成字符串，例如“setInterval("console.log('a');", 1000),意思是1000毫秒执行一次console.log”。但是一般用function(){}
 
 ### BOM
-
 * 查看滚动条的滚动距离
     * window.pageXOffset：横向滚动条滚动距离
+    <br>
     pageYOffset：纵向滚动条滚动距离
+    <br>
     IE8及IE8以下不兼容
     * document.body.scrollLeft,
+    <br>
     documentElement.scrollLeft: 横向滚动条滚动距离
     * document.body.scrollLeft,
+    <br>
     documentElement.scrollLeft: 纵向滚动条滚动距离
-    
 * 查看视口的尺寸
     * window.innerWidth/innerHeight  
-      IE8及IE8以下不兼容
+        IE8及IE8以下不兼容
+        <br>
     **注意渲染模式：**   
         - 1 标准模式：<！DOCTYPE html>是 html5 的
         - 2 怪异/混杂模式：试图去兼容之前的语法，去掉<！DOCTYPE html>这一行即可开启（向后兼容）
@@ -193,21 +230,38 @@ var date = new Date()大写的Date是系统提供的一个构造函数，通过n
     * 区别：scrollBy()会在之前的数据基础之上做累加
 
 ### 脚本化CSS
-* 读写元素CSS属性
-    * dom.style.prop
-        * 可读写行间样式，没有兼容性问题，碰到float这样的保留字属性，前面应加css
-        eg:float——> cssFloat
-        ```
-            div.style.float => div.style.cssFloat
-        ```
-        * 复合属性尽量拆解，组合单词变成小驼峰式写法
-        ```
-            div.style.border="2px solid black";
-            可以转换成
-            div.style.borderWidth="5px";
-            div.style.borderStyle="double"
-        ```
-        * 写入的值必须是字符串格式
+* 读写元素CSS属性：dom.style.prop 只有这个可读可写，其余只能读
+    * 可读写行间样式，没有兼容性问题，碰到float这样的保留字属性，前面应加css
+    <br>
+    eg:float——> cssFloat
+    ```
+        div.style.float => div.style.cssFloat
+    ```
+    * 复合属性尽量拆解，组合单词变成小驼峰式写法
+    ```
+        div.style.border="2px solid black";
+        可以转换成
+        div.style.borderWidth="5px";
+        div.style.borderStyle="double"
+    ```
+    * 写入的值必须是字符串格式
+* 查询计算样式：window.getComputedStyle(ele,null)
+    * 原生底层方法，window.getComputedStyle不管填不填都有值，这里面的值都是默认值，这会获取的是这个当前元素所展现出的一切CSS属性的显示值（显示值是你最终看到的值）
+    * window.getComputedStyle(ele, null);括号里面要填两个参数，第一个ele是填的是你要获取谁，第二个参数先填写null(如果需要获取伪元素，第二个参数则填写伪元素)
+    ```
+    例：获取伪元素方法
+    var div = document.getElementsByTagName('div')[0];
+    window.getComputedStyle(div, "after")[prop]
+    ```
+    * 计算样式只读
+    * 返回的计算样式的值都是绝对值，没有相对单位
+    * IE8及IE8以下不兼容
+* 查询样式：ele.currentStyle
+    * 计算样式只读
+    * 返回的计算样式的值不是经过转换的绝对值
+    * IE独有的属性
+* 查找操作样式表：document.styleSheets
+    * 该属性存储了一个html文档里面的所有CSS样式表的集合
 
 
 
