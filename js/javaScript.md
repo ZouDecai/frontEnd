@@ -32,7 +32,6 @@
     ```
     <br>
     PARENTNODE.insertBefore(a, b);一定是div先insert a，before b
-    <br>
     ```
     var strong = document.createElement('strong');
     div.insertBefore(strong, span);
@@ -49,6 +48,7 @@
     div.removeChild(i);
     i.remove();
     ```
+    
 * 替换
 <br>
     parentNode.replaceChild(new, origin);   用新的new去置换旧的origin
