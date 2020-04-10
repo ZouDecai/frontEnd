@@ -8,7 +8,6 @@
     document.createComment(); 创建注释节点
     <br>
     document.createDocumentFragment();  创建文档碎片节点
-    
     ```
     var div = document.createElement('div');
     var text = document.createTextNode('邓宝宝');
@@ -18,7 +17,6 @@
 * 插
 <br>
     PARENTNODE.appendChild(); 可以理解为push
-
     ```
     var div = document.createElement('div');
     document.body.appendChild(div);
@@ -30,7 +28,6 @@
     span.appendChild(text1);
     span.appendChild(text);
     ```
-    
     PARENTNODE.insertBefore(a, b);一定是div先insert a，before b
     
     ```
@@ -43,7 +40,6 @@
 <br>
     parent.removeChild(); 就是把它进行了剪切操作
     child.remove(); 自尽，完全删除
-    
     ```
     div.removeChild(i);
     i.remove();
@@ -52,7 +48,6 @@
 * 替换
 <br>
     parentNode.replaceChild(new, origin);   用新的new去置换旧的origin
-    
     ```
     var p = document.createElement('p');
     div.replaceChild(p, strong);
