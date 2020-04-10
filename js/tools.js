@@ -41,3 +41,12 @@ function getViewportOffset() {
         }
     }
 }
+
+// 获取样式属性方法
+function getStyle(elem,prop) {
+    if(window.getComputedStyle) {
+       return window.getComputedStyle(elem, null)[prop];
+    } else {
+       return elem.currentStyle[prop];
+    }
+}
