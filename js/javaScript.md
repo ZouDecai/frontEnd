@@ -8,14 +8,17 @@
     document.createComment(); 创建注释节点
     <br>
     document.createDocumentFragment();  创建文档碎片节点
+    <br>
     ```
     var div = document.createElement('div');
     var text = document.createTextNode('邓宝宝');
     var comment = document.createComment('this is Comment');
     ```
+
 * 插
 <br>
     PARENTNODE.appendChild(); 可以理解为push
+    <br>
     ```
     var div = document.createElement('div');
     document.body.appendChild(div);
@@ -27,17 +30,21 @@
     span.appendChild(text1);
     span.appendChild(text);
     ```
+    <br>
     PARENTNODE.insertBefore(a, b);一定是div先insert a，before b
+    <br>
     ```
     var strong = document.createElement('strong');
     div.insertBefore(strong, span);
     var i = document.createElement('i');
     div.insertBefore(i, strong);
     ```
+
 * 删
 <br>
     parent.removeChild(); 就是把它进行了剪切操作
     child.remove(); 自尽，完全删除
+    <br>
     ```
     div.removeChild(i);
     i.remove();
@@ -45,6 +52,7 @@
 * 替换
 <br>
     parentNode.replaceChild(new, origin);   用新的new去置换旧的origin
+    <br>
     ```
     var p = document.createElement('p');
     div.replaceChild(p, strong);
@@ -121,6 +129,7 @@ var date = new Date()大写的Date是系统提供的一个构造函数，通过n
         setInterval(function() {},1000);指每隔1000毫秒执行一次这个函数
         <br>
         如果先定义1000毫秒，在后面改成2000毫秒，程序仍按1000毫秒执行，因为它只识别一次，不能通过改变time来改变setInterval的快慢 
+        <br>
         ```
         var time = 1000;
         setInterval(function(){
@@ -128,7 +137,9 @@ var date = new Date()大写的Date是系统提供的一个构造函数，通过n
         }, time);
         time = 2000;
         ```
+        <br>
         setInterval 计算时间非常不准
+
         ```
         var firstTime = new Date().getTime();
         setInterval(function() {
@@ -141,6 +152,7 @@ var date = new Date()大写的Date是系统提供的一个构造函数，通过n
         <em> 注意</em>：setInterval();是 window 的方法，在全局上就算不写 window. setInterval();他也会上全局的 GO 里面查找，所以不写 window.也行。每一个 setInterval();都会返回一个一个数字，作为唯一的标识，有唯一标识就可以把他清除掉（利用 clearInterval 清除)
     <br>
     * clearInterval():能让setInterval停止
+
         ```
         var i = 0;
         var timer = setInterval(function() {
@@ -168,7 +180,9 @@ var date = new Date()大写的Date是系统提供的一个构造函数，通过n
         clearTimeout(timer);
         这种写法，setTimeout()还没执行就被清除了，执行不了
         ```
+
     timer1=setTimeout()返回的唯一标识和setInterval返回的唯一标识是不会重叠的，他们两个是依次有序的
+
     ```
     var timer1 = setTimeout(function() {
     }, 1000);
@@ -177,6 +191,7 @@ var date = new Date()大写的Date是系统提供的一个构造函数，通过n
     }, 1000);
     // timer2 = 2
     ```
+
     setInterval();setTimeout();clearInterval();clearTimeout();这四个都是全局对象，都是window上的方法，内部函数this指向window
     <br>
     setInterval('func()',1000)和setTimeout();都有另一种形式展现，里面可以写成字符串，例如“setInterval("console.log('a');", 1000),意思是1000毫秒执行一次console.log”。但是一般用function(){}
@@ -198,7 +213,7 @@ var date = new Date()大写的Date是系统提供的一个构造函数，通过n
     * window.innerWidth/innerHeight  
         IE8及IE8以下不兼容
         <br>
-    **注意渲染模式：**   
+    *注意渲染模式：*   
         - 1 标准模式：<！DOCTYPE html>是 html5 的
         - 2 怪异/混杂模式：试图去兼容之前的语法，去掉<！DOCTYPE html>这一行即可开启（向后兼容）
         - 3 document.compatMode 是用于判断是怪异模式还是标准模式的，如果是标准模式则返回"CSS1Compat",否则返回BackCompat(怪异模式向后兼容)
@@ -234,25 +249,31 @@ var date = new Date()大写的Date是系统提供的一个构造函数，通过n
     * 可读写行间样式，没有兼容性问题，碰到float这样的保留字属性，前面应加css
     <br>
     eg:float——> cssFloat
+
     ```
         div.style.float => div.style.cssFloat
     ```
+
     * 复合属性尽量拆解，组合单词变成小驼峰式写法
+
     ```
         div.style.border="2px solid black";
         可以转换成
         div.style.borderWidth="5px";
         div.style.borderStyle="double"
     ```
+
     * 写入的值必须是字符串格式
 * 查询计算样式：window.getComputedStyle(ele,null)
     * 原生底层方法，window.getComputedStyle不管填不填都有值，这里面的值都是默认值，这会获取的是这个当前元素所展现出的一切CSS属性的显示值（显示值是你最终看到的值）
     * window.getComputedStyle(ele, null);括号里面要填两个参数，第一个ele是填的是你要获取谁，第二个参数先填写null(如果需要获取伪元素，第二个参数则填写伪元素)
+
     ```
     例：获取伪元素方法
     var div = document.getElementsByTagName('div')[0];
     window.getComputedStyle(div, "after")[prop]
     ```
+
     * 计算样式只读
     * 返回的计算样式的值都是绝对值，没有相对单位
     * IE8及IE8以下不兼容
@@ -262,6 +283,44 @@ var date = new Date()大写的Date是系统提供的一个构造函数，通过n
     * IE独有的属性
 * 查找操作样式表：document.styleSheets
     * 该属性存储了一个html文档里面的所有CSS样式表的集合
+
+### 事件
+是一个动作，没效果也是事件，它是交互体验的核心功能
+* ele.onxxx = function(event){}
+    * 兼容性很好，但是一个元素只能绑定一个事件处理程序
+
+    ```
+    例:div.onclick = function(){}
+    div.onclick就叫做可以被点击的事件（绑定事件类型）,function(){}是反馈，一旦事件被触发，就要执行function里面的函数（绑定的是一个事件处理函数）
+    div.onclick=function(){
+        console.log('a');
+    }
+    div.onclick = function(){
+        console.log('b');
+    }
+    b生效，b覆盖了a,这是赋值的原因
+    ```
+    * 基本等同于写在HTML行间上
+    ```
+    <div style="width: 100px;height: 100px;background-color: red;" onclick="console.log('a')"></div>
+    <script>
+    var div = document.getElementsByTagName('div')[0];
+    /* div.onclick = function() {
+        console.log('this is onClick');
+    } */
+    </script>
+    onclick="console.log('a')"是句柄的绑定方式，写在行间不用写function(){}
+    ```
+    * 程序this指向是dom元素本身
+* obj.addEventListener(type,fn,false)里面可以填三个参数
+    * div.addEventListener('事件类型'，处理函数， false)
+    * IE9以下不兼容，可以为一个事件绑定多个处理程序
+    *注意*：obj.addEventListener不能给同一个函数绑定多次，重复的绑定一个函数就不能用了
+    * 程序this指向是dom元素本身
+* obj.attachEvent('on'+type,fn);
+    * div.attachEvent('on'+事件类型，处理函数)
+    * IE独有，一个事件同样可以绑定上处理多个处理程序
+    * 程序this指向window
 
 
 
