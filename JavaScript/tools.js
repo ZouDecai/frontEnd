@@ -50,3 +50,16 @@ function getStyle(elem,prop) {
        return elem.currentStyle[prop];
     }
 }
+
+//给一个DOM对象添加该类型的事件处理函数
+function addevent(elem, type, handle) {
+    if(elem.addEventListener) {
+        elem.addEventListener(type, handle, false);
+    } else if(elem.attachEvent) {
+        elem.attachEvent('on' + type, function() {
+            handle.call(elem);
+        })
+    } else{
+        elem['on' + type] = handle;
+    }
+}

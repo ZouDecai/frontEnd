@@ -286,6 +286,8 @@ var date = new Date()大写的Date是系统提供的一个构造函数，通过n
 
 ### 事件
 是一个动作，没效果也是事件，它是交互体验的核心功能
+
+#### 绑定事件
 * ele.onxxx = function(event){}
     * 兼容性很好，但是一个元素只能绑定一个事件处理程序
 
@@ -322,5 +324,18 @@ var date = new Date()大写的Date是系统提供的一个构造函数，通过n
     * IE独有，一个事件同样可以绑定上处理多个处理程序
     * 程序this指向window
 
-
+#### 解除事件处理程序
+* ele.onclick = false/''/null;
+    * 解除ele.onXXX = function(event) {}
+    ```
+    div.onclick = function () {
+        console.log('onclick');
+        this.onclick = null;
+    }
+    ```
+* ele.removeEventListener(type,fn, false)
+    * 解除addEventListener(type, fn, false)
+* ele.detachEvent('on'+type, fn)
+    * obj.attachEvent('on'+type, fn)
+*注*若绑定匿名函数，则无法解除
 

@@ -24,7 +24,7 @@
     /* div.onclick = function() {
         console.log('this is onClick');
     } */
-    div.addEventListener('click', function(){
+    /* div.addEventListener('click', function(){
         console.log('b');
     }, false);
     div.addEventListener('click', function(){
@@ -39,6 +39,25 @@
                 console.log(i);
             }, false);
         }(i))
+    } */
+
+    /* //给一个DOM对象添加该类型的事件处理函数
+    function addevent(elem, type, handle) {
+        if(elem.addEventListener) {
+            elem.addEventListener(type, handle, false);
+        } else if(elem.attachEvent) {
+            elem.attachEvent('on' + type, function() {
+                handle.call(elem);
+            })
+        } else{
+            elem['on' + type] = handle;
+        }
+    } */
+
+    div.addEventListener('click', test, false);
+    function test() {
+        console.log('打印a');
     }
- </script>
+    div.removeEventListener('click', test, false);
+</script>
  </html>
