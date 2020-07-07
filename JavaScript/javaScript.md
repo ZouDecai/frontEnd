@@ -373,3 +373,29 @@ obj.addEventListener(type,fn,true);
     3. event.preventDefault(); // W3C标准，IE9以下不兼容
     4. event.returnValue = false; // 兼容IE
     5. 封装阻止默认事件的函数 cancelHandler(event);
+
+#### 事件对象
+非ie浏览器会把事件对象（记载了数据发生时的状态和信息）打包传到参数里面去。ie浏览器在window.event里面储存事件对象。
+1. event || window.event 
+    1. window.event用于IE,event只能用于非IE浏览器
+
+触发事件的地方叫事件源
+
+2. 事件源对象：(找事件源对象的方法)
+    1. event.target // 火狐独有的
+    2. event.srcElement // IE独有的
+
+#### 事件委托
+利用事件冒泡，和事件源对象进行处理
+
+* 优点
+    1. 性能：不需要循环所有的元素一个个绑定事件
+    2. 灵活：当有新的元素时不需要重新绑定事件
+
+***面试问题***：什么是事件捕获？
+一个是冒泡，一个是捕获obj.addEventListener(type, fn, true);他所说的第二种捕获不是事件处理模型，而是一种真实的事件获取的过程，用于解决拖拽鼠标出方块的问题.
+仅在ie好使，利用div.setCapture();会捕获页面上发生的所有事情，都获取到自己身上。对应的用div.releaseCapture();释放。但是方法比较老旧，一般不用。
+
+#### 事件分类
+1. 鼠标事件（不需要小驼峰和大驼峰）
+    * click(点击)、mousedown(鼠标按下)、mouseup()、contextmenu(右键菜单)、mousemove(鼠标移动事件)、mouseover(鼠标)、

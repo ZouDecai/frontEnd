@@ -6,8 +6,11 @@
     <title>Document</title>
     <style type="text/css">
         .wrapper{
-            width: 300px;
-            height: 300px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
             background-color:red;
         }
         .content{
@@ -23,12 +26,12 @@
     </style>
 </head>
 <body>
-    <!-- <div class="wrapper">
-        <div class="content">
+    <div class="wrapper">
+        <!-- <div class="content">
             <div class="box"></div>
-        </div>
-    </div> -->
-    <ul>
+        </div> -->
+    </div>
+    <!-- <ul>
         <li>1</li>
         <li>2</li>
         <li>3</li>
@@ -39,7 +42,7 @@
         <li>8</li>
         <li>9</li>
         <li>10</li>
-    </ul>
+    </ul> -->
 </body>
 <script>
     var wrapper = document.getElementsByClassName('wrapper')[0];
@@ -110,11 +113,44 @@
             console.log(this.innerText);
         }
     } */
-    var ul = document.getElementsByTagName('ul')[0];
+    /* var ul = document.getElementsByTagName('ul')[0];
     ul.onclick = function(e) {
         var event = e || window.evnet;
         var target = event.target || event.srcElement;
         console.log(target.innerText);
+    } */
+
+    /* var disX,
+        disY;
+    wrapper.onmousedown = function(e) {
+        disX = e.pageX - parseInt(wrapper.style.left);
+        disY = e.pageX - parseInt(wrapper.style.top);
+        document.onmousemove = function(e) {
+            var event = e || window.event;
+            console.log(e.pageX + "" + e.pageY);
+            wrapper.style.left = e.pageX + "px";
+            wrapper.style.top = e.pageY + "px";
+        }
+        document.onmouseup = function() {
+            document.onmousemove = null;
+        }
+    } */
+    /* click = mousedown + mouseup
+    document.onclick = function() {
+        console.log('click');
     }
+    document.onmousedown = function() {
+        console.log('mousedown');
+    }
+    document.onmouseup = function() {
+        console.log('mouseup')
+    } */
+    wrapper.onmouseover = function() {
+        wrapper.style.background = 'yellow';
+    }
+    wrapper.onmouseout = function() {
+        wrapper.style.background = 'green';
+    }
+
 </script>
 </html>

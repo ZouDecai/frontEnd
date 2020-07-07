@@ -52,7 +52,7 @@ function getStyle(elem,prop) {
 }
 
 //给一个DOM对象添加该类型的事件处理函数
-function addevent(elem, type, handle) {
+function addEvent(elem, type, handle) {
     if(elem.addEventListener) {
         elem.addEventListener(type, handle, false);
     } else if(elem.attachEvent) {
@@ -78,5 +78,30 @@ function cancelHandler(event) {
         event.preventDefault();
     }else{
         event.returnValue = false;
+    }
+}
+
+// 封装拖拽功能(鼠标按住方块跟着动，松开就不跟着走)
+function drag(elem) {
+    var disX,
+        disY;
+    addEvent(elem, 'mousedown', function(e) {
+        var event = e || window.event;
+        disX = event.clientX - parseInt(getStyle(elem, 'left'));
+        disY = event.clientY - parseInt(getStyle(elem, 'top'));
+        addEvent(document, 'mousemove', mouseMove);
+        addEvent(document, 'mouseup', mouseUp);
+        stopBubble(event);
+        cancelHandler(event);
+    });
+    function mouseMove(e) {
+        var event = e || window.event;
+        elem.style.left = event.clientX - disX + 'px';
+        elem.style.top = event.clientY - disY + 'px';
+    }
+    function mouseUp(e) {
+        var event = e || window.event;
+        removeEvent(document, 'mousemove', mouseMove);
+        removeEvent(document, 'mouseup', mouseUp);
     }
 }
