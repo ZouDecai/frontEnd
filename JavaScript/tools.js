@@ -63,3 +63,20 @@ function addevent(elem, type, handle) {
         elem['on' + type] = handle;
     }
 }
+
+// 封装取消冒泡的函数
+function stopBubble(event) {
+    if(event.stopPropagation) {
+        event.stopPropagation();
+    }else{
+        event.cancelBubble = true;
+    }
+}
+// 封装阻止默认事件的函数
+function cancelHandler(event) {
+    if(event.preventDefault) {
+        event.preventDefault();
+    }else{
+        event.returnValue = false;
+    }
+}
