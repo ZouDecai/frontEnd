@@ -398,4 +398,9 @@ obj.addEventListener(type,fn,true);
 
 #### 事件分类
 1. 鼠标事件（不需要小驼峰和大驼峰）
-    * click(点击)、mousedown(鼠标按下)、mouseup()、contextmenu(右键菜单)、mousemove(鼠标移动事件)、mouseover(鼠标)、
+    * click(点击)、mousedown(鼠标按下)、mouseup()、contextmenu(右键菜单)、mousemove(鼠标移动事件)、mouseover(鼠标)、mouseout、mouseenter、mouseleave。
+2. 用button来区分鼠标的按键
+    * 只有mouseup、mousedown两个能区分鼠标垫左右键
+    * button返回值，右键是0，左键是2，中间是1
+3. DOM3标准规定：click事件只能监听左键，只能通过mousedown和mouseup来判断鼠标
+4. 移动端onmousedown不能用，只能用touchstart,touchmove,touchend
