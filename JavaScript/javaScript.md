@@ -404,3 +404,24 @@ obj.addEventListener(type,fn,true);
     * button返回值，右键是0，左键是2，中间是1
 3. DOM3标准规定：click事件只能监听左键，只能通过mousedown和mouseup来判断鼠标
 4. 移动端onmousedown不能用，只能用touchstart,touchmove,touchend
+5. 键盘事件
+    1. keydown(按键按下任意键), keyup(按键弹起), keypress(按键按下字符键)
+    2. 触发顺序是keydown>keypress>keyup
+    3. keydown和keypress区别
+        * keydown可以响应任意键盘按键，keypress只可以相应字符类键盘按键
+            * 检测字符类不准确，keypress检测字符很准。但是keydown能监控所有，包括上下左右都能监控，但是keypress只能监视字符。
+            * 用法：如果你想监控字符类按键，并想区分大小写，就用keypress,如果是操作类按键的话，就用keydown(which:39是按键牌号39，还是asc码)
+        * keypress返回ASCII码，可以转换成相应字符
+    
+    **注意**：游戏触发设置在keydown上，机械键盘抬起速度快反馈力量大，对游戏没用
+6. 文本操作事件
+    1. input：输入框里面所有变化（增删改）都会触发input事件
+    2. change: 对比鼠标聚焦，或失去焦点的时，两个状态是否发生改变，如果两个状态没有改变就不触发，如果发生改变就触发
+    3. focus, blur聚焦和失去焦点
+7. 窗体操作类（window上的事件）
+    1. scroll：滚动条滚动触发事件
+    2. load：页面加载完成触发事件
+
+    利用了onload就能操作写在下面的div了,但是我们不能这样用？
+
+    **理由**：html和css是一起解析的，在解析的时候会有html有domTree,css有cssTree生成（树形图的顶底是document,然后是html，然后是head,body）,两个树拼在一起是renderTree.什么时候把节点放在树里？dom节点解析，如确定是img标签就把他放到树里。（先解析完img，同时开启一个线程异步的去下载里面的内容，后下载完）。我们把js的script标签写在最下面的好处是，这些刚刚解析完js就能操作页面了，就更快了。而window.onload要等整个页面解析完，下载完才能操作js，才能触发事件（效率很差）。onload能提醒我们什么时候整个页面解析完毕。在设计弹窗广告时，就要用onload，等整个页面下载完了才开始用，但是onload不能用于主程序里面。

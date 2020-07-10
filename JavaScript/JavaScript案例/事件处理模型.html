@@ -23,14 +23,18 @@
             height: 100px;
             background-color: orange;
         }
+        input{
+            border: 1px solid #01f;
+        }
     </style>
 </head>
 <body>
-    <div class="wrapper">
-        <!-- <div class="content">
+<input type="text" value="请输入用户名" style="color: #999;" onfocus="if(this.value==='请输入用户名'){this.value=''; this.style.color='#424242'}" onblur="if(this.value === ''){this.value='请输入用户名';this.style.color='#999'}">
+    <!-- <div class="wrapper">
+        <div class="content">
             <div class="box"></div>
-        </div> -->
-    </div>
+        </div>
+    </div> -->
     <!-- <ul>
         <li>1</li>
         <li>2</li>
@@ -145,12 +149,12 @@
     document.onmouseup = function() {
         console.log('mouseup')
     } */
-    wrapper.onmouseover = function() {
+    /* wrapper.onmouseover = function() {
         wrapper.style.background = 'yellow';
     }
     wrapper.onmouseout = function() {
         wrapper.style.background = 'green';
-    }
+    } */
 
     /* document.onmousedown = function(e) {
         if(e.button === 2) {
@@ -160,11 +164,15 @@
         }    
     } */
 
-    document.onclick = function(e) {
+    /* document.onclick = function(e) {
         console.log(e);
-    }
+    } */
 
-    /* var firstTime = 0;
+    /* 
+    拖拽应用：实现拖拽正常拖，但是点击就正常跳转
+    思路：拖拽由down+move+up，但是不管隔多久都算一个click，可以理解成拖拽不等于点击click。看时间差解决：按下+抬起的时间差>多少，就能知道是拖拽了。
+    答案：按下之后才能绑定move事件，抬起了move事件就能解除
+    var firstTime = 0;
     var lastTime = 0;
     var key = false;
 
@@ -184,8 +192,11 @@
             console.log('click');
             key = false;
         }
-    } */
+    } 
+    */
 
+    /* 
+    连续按键盘按键的时候就是连续触发keydown和keypress，松开触发keyup
     document.onkeypress = function() {
         console.log('keypress');
     }
@@ -196,8 +207,26 @@
     
     document.onkeyup = function(e) {
         console.log(e);
+    } 
+    */
+
+    /*
+    把Unicode编码转成对应值
+    document.onkeypress = function(e){
+        console.log(String.fromCharCode(e.charCode))
+    } 
+    */
+
+    /* var input = document.getElementsByTagName('input')[0];
+    input.oninput = function(e) {
+        console.log(this.value);
     }
-    
+    input.onchange = function(e) {
+        console.log(this.value);
+    } */
+    window.onscroll = function() {
+        console.log(window.pageXOffset + " " + window.pageYOffset);
+    }
 
 </script>
 </html>
