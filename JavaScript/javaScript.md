@@ -59,7 +59,7 @@
     // 不过strong标签还存在，只不过是被剪切
     ```
 
-### DOM基本操作
+#### DOM基本操作
 * element节点的一些属性
 <br>
     innerHTML
@@ -71,7 +71,7 @@
     <br>
     ele.getAttribute()
 
-### 日期对象Date（）
+#### 日期对象Date（）
 日期对象，是系统提供好的
 <br>
 var date = new Date()大写的Date是系统提供的一个构造函数，通过new Date的方法会给我们返回一个对象，这个对象就是一个日期对象。日期对象有很多属性和方法。小的date代表此时此刻的时间。用小的date调用方法，如date.getDate()
@@ -425,3 +425,8 @@ obj.addEventListener(type,fn,true);
     利用了onload就能操作写在下面的div了,但是我们不能这样用？
 
     **理由**：html和css是一起解析的，在解析的时候会有html有domTree,css有cssTree生成（树形图的顶底是document,然后是html，然后是head,body）,两个树拼在一起是renderTree.什么时候把节点放在树里？dom节点解析，如确定是img标签就把他放到树里。（先解析完img，同时开启一个线程异步的去下载里面的内容，后下载完）。我们把js的script标签写在最下面的好处是，这些刚刚解析完js就能操作页面了，就更快了。而window.onload要等整个页面解析完，下载完才能操作js，才能触发事件（效率很差）。onload能提醒我们什么时候整个页面解析完毕。在设计弹窗广告时，就要用onload，等整个页面下载完了才开始用，但是onload不能用于主程序里面。
+
+### json
+JSON是一种传输数据的格式（以对象为样板，本质上就是对象，但用途有区别，对象就是本地用的，json是用来传输的）
+1. JSON.parse();    // string ——> json
+2. JSON.stringify();    // json ——> string
