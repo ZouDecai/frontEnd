@@ -430,3 +430,13 @@ obj.addEventListener(type,fn,true);
 JSON是一种传输数据的格式（以对象为样板，本质上就是对象，但用途有区别，对象就是本地用的，json是用来传输的）
 1. JSON.parse();    // string ——> json
 2. JSON.stringify();    // json ——> string
+
+### 异步加载JS
+js是单线程的，会阻断HTML,css加载（因为js会修改html和css一起加载会乱）,所以是同步加载js。先下载js，再下载html和css。常规来说js是同步加载的.
+1. js加载的缺点：加载工具方法没必要阻塞文档，过得js加载会影响页面效率，一旦网速不好，那么整个网站将等待js加载而不进行后续渲染等工作。
+2. 有些工具方法需要按需加载，用到再加载，不用不加载。
+3. javascript异步加载的三种方案
+    1. defer异步加载，但要等到dom文档全部解析完(dom树生成完)才会被执行。只有IE能用。dom文档全部解析完，不代表整个页面加载完
+    2. async 异步加载，加载完就执行,async只能加载外部脚本，不能把js写在script标签里。ie9以上可以用，w3c标准
+    3. 1和2执行时也不阻塞页面
+    4. 创建script，插入到DOM中,加载完毕后callBack(按需加载，方便)   // 常用

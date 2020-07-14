@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Json、异步加载js</title>
 </head>
 <body>
 </body>
@@ -22,5 +22,40 @@ var obj = {
 JSON.stringify(obj);    //"{"name": "abc","age" : 123}"
 var str='{"name": "abc","age" : 123}'
 JSON.parse(str);    // Object{name:"abc", age: 123}
+</script>
+
+<script type="text/javascript" src="tools.js" defer="defer">
+    var a = 123;
+</script>
+<script type="text/javascript" aysnc="aysnc" src="tools.js">
+    // 这里面不能写var等等脚本
+</script>
+<script type="text/javascript">
+    function loadScript(url, callback) {
+        var script = document.createElement('script');
+        script.type = "text/javascript";
+        if(script.readyState) {
+            script.onreadystatechange = function() {
+                if(script.readyState === "complete" || script.readyState == "loaded") {
+                    callback();
+                }
+            }
+        } else {
+            script.onload = function() {
+            // Safari chrome firefox opera
+                callback();
+            }
+        }
+        script.src = url;
+        document.head.appendChild(script);
+    }
+    loadScript('tools.js', function() {
+        getScrollOffset();
+    })
+</script>
+
+<script>
+    // js加载时间线
+    
 </script>
 </html>

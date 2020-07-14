@@ -105,3 +105,23 @@ function drag(elem) {
         removeEvent(document, 'mouseup', mouseUp);
     }
 }
+
+// 封装异步加载函数
+function loadScript(url, callback) {
+    var script = document.createElement('script');
+    script.type = "text/javascript";
+    if(script.readyState) {
+        script.onreadystatechange = function() {
+            if(script.readyState === "complete" || script.readyState == "loaded") {
+                callback();
+            }
+        }
+    } else {
+        script.onload = function() {
+        // Safari chrome firefox opera
+            callback();
+        }
+    }
+    script.src = url;
+    document.head.appendChild(script);
+}
