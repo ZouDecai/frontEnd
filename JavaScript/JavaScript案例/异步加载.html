@@ -6,5 +6,19 @@
     <title>Document</title>
 </head>
 <body>
+    <div style="width: 100px; height: 100px;background-color: #ff0000;"></div>
 </body>
+<script>
+    // 加载完成后具有消除文档流功能
+    /* window.onload = function() {
+        document.write('a');
+    } */
+    console.log(document.readyState);
+    document.onreadystatechange = function() {
+        console.log(document.readyState);
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){}, false)
+
+</script>
 </html>

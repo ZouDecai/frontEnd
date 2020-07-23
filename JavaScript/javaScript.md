@@ -440,3 +440,19 @@ js是单线程的，会阻断HTML,css加载（因为js会修改html和css一起�
     2. async 异步加载，加载完就执行,async只能加载外部脚本，不能把js写在script标签里。ie9以上可以用，w3c标准
     3. 1和2执行时也不阻塞页面
     4. 创建script，插入到DOM中,加载完毕后callBack(按需加载，方便)   // 常用
+
+### js加载时间线
+js加载时间线：依据js出生的那一刻起，记录了一系列浏览器按照顺序做的事（就是一个执行顺序）
+
+js时间线步骤（创建document对象——>文档解析完——>文档解析完加载完执行完）
+1. 创建Document对象，开始解析web页面。解析HTML元素和他们的文本内容后添加Element对象和Text节点到文档中。这个阶段document.readyState = "loading"。
+2. 遇到link外部css，创建线程，进行异步加载，并继续解析文档。
+3. 遇到script外部js，并且没有设置async、defer，浏览器同步加载，并阻塞，等待js加载完成并执行该脚本，然后继续解析文档.
+4. 遇到script外部js，并且设置async、defer，浏览器创建线程异步加载，并继续解析文档。
+对于async属性的脚本，脚本加载完成后立即执行。（异步禁止使用document.write(),因为当你整个文档解析到差不多，再调用document.write(),会把之前所有的文档流都清空，用它里面的文档代替）
+5. 遇到img等(带有src)，先正常解析dom结构，然后浏览器异步加载src，并继续解析文档。看到标签直接生产dom树，不用等着img加载完src。
+6. 当文档解析完成(domTree建立完毕，不是加载完毕)，document.readyState = 'interactive'。
+7. 文档解析完成后，所有设置有defer的脚本会按照顺序执行。（注意与async的不同，但同样禁止使用document.write()）;
+8. document对象触发DOMContentLoaded事件，这也标志着程序执行从同步脚本执行阶段，转化为事件驱动阶段。
+9. 当所有async的脚本加载完成并执行后、img等加载完成后（页面所有的都执行加载完之后）,document.readyState='complete', window对象触发load事件。
+10. 从此，从异步响应方式处理用户输入、网络事件等。
