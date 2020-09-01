@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    input:<input type="text" value="">
+</body>
+<script>
+    var str = "abcd\"efg";
+    var str1="abcd\nedf";
+    var input = document.getElementsByTagName('input')[0];
+    // RegExp
+
+    // var reg = /abc/i;
+    // var str = "abcd";
+    // var reg = new RegExp('abc', 'm');
+    // var reg = RegExp(reg);
+
+    // i 不区分大小写
+    // g 全局匹配
+    // m 多行匹配
+
+    // var reg =/^a/g;
+    // var str ="abcde\na";
+
+    // reg.test();
+    // str.match();
+
+    // var reg = /[0-9][0-9][0-9]/g;
+    // var str = "12309u98723zkowsnshiownklko";
+
+    var reg = /[ab][cd][d]/g;
+    var str = 'abcd';
+    var reg = /[^a][^b]/g
+    var str = 'ab1cd';
+    var reg = /(abc|bcd)[0-9]/
+    var str = 'bcd1'
+    
+    // \w === [0-9A-z_]
+    // \w === [^\w]
+    // \d === [0-9]
+    // \D === [^\d]
+    // \s === [\t\n\r\v\f ]
+    // \S === [^\s]
+    // \b === 单词边界
+    // \B === 非单词边界
+    var reg = /\bcde/g;
+    var str = 'abc cde fgh';
+    // \t ===制表符
+    var str = 'abc\tcdefgh';
+    // . === [^\r\n]
+
+
+
+
+</script>
+</html>
