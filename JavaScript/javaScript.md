@@ -540,3 +540,35 @@ js时间线步骤（创建document对象——>文档解析完——>文档解�
     var str = s;
     str.match(reg) [s];
     ```
+    5. \n:换行符
+    6. \f:换页符
+    7. \r:回车符
+    8. \t:制表符
+    9. \v:垂直制表符
+    ```
+    var reg = /\tc/g
+    var str = abc   cdefgh;
+    str.match(reg)  null;
+    var str = 'abc\tcdefgh';
+    str.match(reg) ['   c'];
+    ```
+    10. \s:空白字符,能展示空白的一些字符，他的范围是[\t\n\r\v\f],和一个空格。正则表达式里打一个空格就真的是匹配一个空格。
+    11. \S:代表[^\s]
+    12. \b:单词边界
+    13. \B:非单词边界
+    ```
+    var reg = /\bc/g;
+    var str = 'abc cde fgh';
+    str.match(reg) ['c'];
+
+    var reg = /\bcde\b/g;
+    var str = 'abc cde fgh';
+    str.match(reg) ['cde'];
+    var str = 'abc cdefgh';
+    str.match(reg) ['null'];
+
+    var reg = /\bcde\B/g
+    var str = 'abc cdefgh';
+    str.match(reg) ['cde'];
+    ```
+    14. \uXXXX:查找以十六进制xxxx规定的Unicode字符（十六进制从0000到ffff,包含了所有字符，汉字也在里边）
