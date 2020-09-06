@@ -53,6 +53,59 @@
     var str = 'abc\tcdefgh';
     // . === [^\r\n]
 
+    // 贪婪匹配
+    // n+ {1, }
+    // n* {0, }
+    // n? {0,1}
+    // n{X} {x}
+    // n{x,y} {x,y}
+    // n {x, } {x, }
+    var reg = /\w+/g;
+    var str = 'abc';
+
+    var reg = /\w*/g;
+    var reg = /\d*/g;
+
+    // 检验一个字符串首尾是否含有数字
+    var reg = /^\d|\d$/g;
+
+    //都含有数字
+    var reg = /^\d[/s/S]*\d$/g;
+
+    // reg.exec();
+    var reg = /ab/g;
+    var str = 'abababab';
+    console.log(reg.lastIndex);
+    console.log(reg.exec(str));
+
+    var str = "aaaa";
+    var reg = /(\w)\1\1\1/g;
+    
+    var str = 'aabb';
+    var reg = /(\w)\1(\w)\2/;
+    console.log(reg.exec(str)); // ['aabb','a','b',index:0,input:'aabb']
+    console.log(str.match(reg)); // ['aabb','a','b',index:0,input:'aabb']
+    var reg = /(\w)\1(\w)\2/g;
+    console.log(str.match(reg)); // ['aabb']
+    console.log(str.search(reg)); // 0 返回匹配的位置，匹配不到返回-1
+
+    // xxyy yyxx
+    var reg = /(\w)\1(\w)\2/g;
+    var str = 'aabb';
+    console.log(str.replace(reg, "$2$2$1$1"));
+    
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
