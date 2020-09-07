@@ -93,6 +93,34 @@
     var reg = /(\w)\1(\w)\2/g;
     var str = 'aabb';
     console.log(str.replace(reg, "$2$2$1$1"));
+    console.log(str.replace(reg, function($, $1, $2){
+        return $2 + $2 + $1 + $1;
+    }));
+
+    // the-first-name变成theFirstName
+    var reg = /-(\w)/g;
+    var str = 'the-first-name';
+    console.log(str.replace(reg, function ($, $1) {
+        return $1.toUpperCase();
+    }));
+
+    // 正向预查 正向断言
+    var str = 'abaaaa';
+    var reg = /a(?=b)/g;
+
+    // 字符串去重
+    var str = 'aaaabbbbcccc';
+    var reg = /(\w)\1*/g;
+    console.log(str.replace(reg, '$1'));
+
+    // 将100000变成100.000
+    var str = '10000000';
+    var reg = /(?=(\B)(\d{3})+$)/g;
+    console.log(str.replace(reg, '.'));
+
+
+
+
     
 
 
