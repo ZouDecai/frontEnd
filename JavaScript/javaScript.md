@@ -616,3 +616,135 @@ js时间线步骤（创建document对象——>文档解析完——>文档解�
         ```
     6. n{x,}：可以重复出现n到无数次。量词是n去乘以这个量词，例如上边的，是\w乘以量词，几个\w。
 8. 开头符和结尾符
+    1. ^匹配开头
+        ```
+        var reg =/^abc/g;
+        var str = 'abcde';
+        str.match(reg); ['abc']
+        ```
+    2. $匹配结尾
+        ```
+        var reg =/de$/g;
+        var str = 'abcde';
+        str.match(reg); ['de']
+        ```
+    ```
+    var reg = /^abc$/g;
+    var str = 'abcabc';
+    str.match(reg); null
+    // abc开头并且以这个abc结尾，所以这个写正则表达式就把字符串限定死了。
+    var str = 'abc';
+    str.match(reg); ['abc']
+    ```
+
+```
+写一个正则表达式，检验一个字符串首尾是否含有数字。
+var reg = /^\d|\d$/g;
+解析：因为题目没有说都,所以首尾有一个地方含有数字就行，中间用个或，两边开头结尾都匹配\d即可。
+
+检验一个字符串首尾是否都含有数字。
+var reg = /^\d[\s\S]*\d$/g;
+解析：中间得用一个区间出现0到很多次，区间里只要能代表任意字符就行。
+```
+
+9. 正则表达式上的属性
+    1. global:正则表达式上是否具有标志g，例如上边的，reg.global就是true。
+    2. ignoreCase:正则表达式上是否具有标志i。
+    3. multiline:正则表达式上是否具有标志m。
+    4. source：返回正则表达式的内容。
+    5. lastIndex
+10. 正则表达式上的方法
+    1. test():检测字符串指定的值，返回true或false。
+    2. exec():这也是一种匹配方法
+    ```
+    var reg = /ab/g;
+    var str = 'abababab';
+    console.log(reg.exec(str)); ['ab', index:0,input:'abababab', groups: undefined]
+    console.log(reg.exec(str)); ['ab', index:2,input:'abababab', groups: undefined]
+    console.log(reg.exec(str)); ['ab', index:4,input:'abababab', groups: undefined]
+    console.log(reg.exec(str)); ['ab', index:6,input:'abababab', groups: undefined]
+    console.log(reg.exec(str)); null
+    console.log(reg.exec(str)); ['ab', index:0,input:'abababab', groups: undefined]
+    // 他每次匹配智能匹配一个'ab',这里边index第一次是0，代表了游标的位置，说明第一次匹配的游标是在第0位，第二次匹配的'ab'游标在第2位，一直调用游标一直往后走，直到走到底6位匹配最后一个之后，你再调用方法的话就是null，继续调用的话游标回到最开始的位置匹配第一个。游标在一圈一圈的转。而游标的位置有一个属性，就是上面提到的reg.lastIndex。
+
+    var reg = /ab/g;
+    var str = 'abababab';
+    console.log(reg.lastIndex); 0
+    console.log(reg.exec(str)); ['ab'，index:0，input:'abababab', groups:undefined]
+    console.log(reg.lastIndex); 2
+    console.log(reg.exec(str)); ['ab'，index:2，input:'abababab', groups:undefined]
+    console.log(reg.lastIndex); 4
+    console.log(reg.exec(str)); ['ab'，index:4，input:'abababab', groups:undefined]
+    console.log(reg.lastIndex); 6
+    console.log(reg.exec(str)); ['ab'，index:6，input:'abababab', groups:undefined]
+    console.log(reg.lastIndex); 8
+    console.log(reg.exec(str)); null
+    console.log(reg.lastIndex); 0
+    console.log(reg.exec(str)); ['ab'，index:0，input:'abababab', groups:undefined]
+    // 我们可以发现每次reg.exec()执行匹配之后都会自动的把游标后挪，然后当匹配为null的时候把游标又挪到最开始的地方。那么：
+    var reg = /ab/g;
+    var str = 'abababab';
+    console.log(reg.lastIndex); 0
+    console.log(reg.exec(str)); ['ab'，index:0，input:'abababab', groups:undefined]
+    reg.lastIndex = 0;
+    console.log(reg.exec(str)); ['ab'，index:0，input:'abababab', groups:undefined]
+    // 我可以通过reg.lastIndex给游标手动的挪到第0位，那么他下一次匹配的还是最开始的'ab'，所以他从哪里开始匹配完全受lastIndex控制，并且我们可以手动控制lastIndex。
+
+    var reg = /ab/;
+    var str = 'abababab';
+    console.log(reg.lastIndex); 0
+    console.log(reg.exec(str)); ['ab', index: 0, input:'abababab', groups: undefined]
+    console.log(reg.lastIndex); 0
+    console.log(reg.exec(str)); ['ab', index: 0, input:'abababab', groups: undefined]
+    // 可以看到游标根本就不动，他永远从第1个开始匹配，匹配不了后边
+    ```
+
+    如何匹配一个结构为xxxx的字符串片段？
+    ```
+    var reg = /(\w)\1\1\1/g;
+    var str = 'aaaabbbb';
+    str.match(reg); ['aaaa','bbbb'];
+    ```
+    这里边的小括号还有一个意思叫子表达式，当你把他括起来之后，他会记录里边匹配的内容，然后我们就可以通过\1把他反向引用出来，\1就是反向引用第一个子表达式匹配的内容，就是你\w匹配的东西，我要复制一个一模一样的出来，三个\1就代表后三位的内容必须和第一位完全雷同。
+
+    如何匹配xxyy的形式？
+    ```
+    var reg = /(\w)\1(\w)2/g;
+    var str = 'aabb';
+    str.match(reg); ['aabb'];
+    // \1引用第一个子表达式的内容，\2就引用第二个子表达式的内容
+    var reg = /(\w)\1(\w)2/g;
+    var str = 'aabb';
+    console.log(reg.exec(str)); ['aabb', 'a', 'b', index: 0, input: 'aabb', groups: undefined]
+    ```
+11. 支持正则表达式的String对象的方法
+    1.  match():找到一个或多个正则表达式的匹配
+        ```
+        var reg = /(\w)\1(\w)\2/;
+        var str = 'aabb';
+        console.log(str.match(reg));    ['aabb', 'a', 'b', index: 0, input: 'aabb', groups:undefined]
+
+        var reg = /(\w)\1(\w)\2/g;
+        var str = 'aabb';
+        console.log(str.match(reg));    ['aabb']
+        // 加上g累赘信息全没有
+        ```
+    2. search():检索与正则表达式相匹配的值，如果匹配不到就返回-1，但凡返回的不是-1都代表可以匹配到。
+        ```
+        var reg = /(\w)\1(\w)\2/g;
+        var str = 'edaabbbbee';
+        console.log(str.search(reg));
+        console.log(str.search(reg));
+        // 此时打印的都是2，他返回的是匹配到的这个位置，他追求的只是能不能匹配到，他不管你匹配多少个，所以加不加g无所谓，但是匹配不到就返回-1。
+        ```
+    3. split():把字符串分割为字符串数组
+        ```
+        var reg = /(\w)\1/g;
+        var str = 'bntgjzeaasrrykzeasklwslwoigo';
+        console.log(str.split(reg));  ["bntgjze", "a", "s", "r", "ykzeasklwslwoigo"]
+        // 我们以两个相同字母为界来拆，此时就打印["bntgjze", "a", "s", "r", "ykzeasklwslwoigo"],不好一点的是他会把子表达式的匹配内容一起返回。
+        var reg = /f/g;
+        var str = 'avfdw';
+        console.log(str.split(reg));   ['av', 'dw']  
+        ```
+
