@@ -747,4 +747,94 @@ var reg = /^\d[\s\S]*\d$/g;
         var str = 'avfdw';
         console.log(str.split(reg));   ['av', 'dw']  
         ```
+    4. replace():替换与正则表达式匹配的字串。
+        ```
+        var str = 'aa';
+        console.log(str.replace('a', 'b')); ba
+        // 传两个参数，意思是把a替换成b，此时就打印ba
+        var reg = /a/;
+        var str = 'aa';
+        console.log(str.replace(reg, 'b')); ba
+        // 打印ba,因为正则表达式没加g
+        var reg = /a/g;
+        var str = 'aa';
+        console.log(str.replace(reg, 'b')); bb
+        ```
+    如何把xxyy转换为yyxx?
+    ```
+    var reg = /(\w)\1(\w)\2/g;
+    var str = 'aabb';
+    console.log(str.replace(reg, '$2$2$1$1'));  bbaa
+    // 先把xxyy的形式用正则表达式写出来，然后在正则表达式传入第一个参数，匹配到了之后，第二个参数也得是字符串，这里边也有一个方法可以反向引用正则表达式里子表达式里匹配的内容，$1引用的是第一个子表达式里匹配的内容，$2引用的是第二个，然后把它拼在一起。
+    var reg = /(\w)\1(\w)\2/g;
+    var str = 'aabb';
+    console.log(str.replace(reg, function($, $1 $2){
+        return $2 + $2 + $1 + $1;
+    }));
+    // 里边第二个参数直接传function, 这个function系统会帮我们调用，最后返回一个字符串即可。系统会传几个参数进去，我们得用形参接收。第一个参数是正则表达式匹配结果，第二个参数是第一个子表达式匹配的内容，第三个参数是第二个子表达式匹配的内容，我们最后把他们拼在一起即可。
+    ```
+    5. toUpperCase(): 把字符串转换为大写
+        ```
+        var str = 'aabb';
+        str.toUpperCase();  AABB
+        ```
+    6. toLowerCase(): 把字符串转换为小写
+        ```
+        var str = 'aabb';
+        str.toUpperCase().toLowerCase();   aabb
+        ```
+    把the-first-name变成小驼峰式大写
+    ```
+    var reg = /-(\w)/g;
+    var str = 'the-first-name';
+    console.log(str.replace(reg, function($, $1){
+        return $1.toUpperCase();
+    }))
+    解析：我们只需要把-f变成F, -n变成N即可，那么先定义正则表达式把-f和-n选出来，我们把f和n那一位装到子表达式里，然后用replace替换，现在都选出来了，然后替换成子表达式的大写即可，现在就打印theFirstName。
+    注意：reg找了几次function就执行几次
+    ```
+12. 正向预查（正向断言）
+    ```
+    var reg = /a(?=b)/g;
+    var str = 'abaaaa';
+    str.match(reg); ['a']
+    // 现在要找a，但是有条件，要找的是后边紧跟着b的那个a，就可以这么写，这里边b只是起到修饰的作用，不参与选择。
+    var reg = /a(?!b)/g;
+    var str = 'abaaaaaa';
+    str.match(reg); ["a", "a", "a", "a", "a", "a"]
+    这就是找的a必须是后边没有紧跟着b的a
+    ```
+13. 非贪婪匹配：贪婪匹配是能多就不少，非贪婪匹配就是能少就不多，只需要在量词后边加上？即可成为非贪婪匹配。
+    ```
+    var reg = /\w+?/g;
+    var str = 'aaa';
+    str.match(reg); ['a', 'a', 'a']
+
+    var reg = /\w??/g;
+    var str = 'aaa';
+    str.match(reg); ['', '', '']
+    // 这里第一个？是量词，第二个？是转为非贪婪匹配
+    ```
+14. 补充
+    1. 你要匹配空格就直接在正则表达式里敲空格即可。
+        ```
+        var reg = / /g;
+        var str = 'a aa';
+        str.match(reg); [' ']
+        ```
+    2. 如果你用replace()想把里边的内容替换成$的话必须在前边再加一个$，因为单个是有语法含义。
+    3. 正则表达式里的｜如果不加括号就代表前边一个或，后边一个或。
+    4. 正则表达式里如果想匹配\、？、+、*、（）等有语法含义的，前边必须加转义符号\。
+```
+var reg = /(\w)\1*/g;
+var str = 'aaaaaabbbbbccccc';
+console.log(str.replace(reg, '$1'));    abc
+// 先把他选出来，正则里*是\1的量词，所以他选出来了一片同样的字符，然后替换成第一个子表达式里匹配的内容即可。加上g就都替换了，打印abc。
+```
+```
+var str = '100000000';
+var reg = /(?=(\B)(\d{3})+$)/g;
+console.log(str.replace(reg, '.'));     100.000.000
+//  首先得是从后往前，思路是先找空，什么样的空，从后往前每隔三位的那个空，所以得用正向预查修饰这个空，正向预查的括号前边啥都不写就代表空，然后括号里$代表以什么结尾，也就是从后往前查的意思，\d{3}代表三位数，+代表出现了一次到多次，所以这就把空修饰好，得再加一个修饰\B,必须是非单词边界，现在把这个空替换成.
+```
 
