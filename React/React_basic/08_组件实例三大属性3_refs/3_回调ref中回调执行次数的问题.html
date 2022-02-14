@@ -44,7 +44,7 @@
           return(
             <div>
               <h2>今天天气很{isHot ? '炎热' : '凉爽'}</h2>
-              {/*<input ref={(c) => {this.input1 = c;console.log('@', c);}} type="text"/><br/>*/}
+              <input ref={(c) => {this.input1 = c;console.log('@', c);}} type="text"/><br/>
               <input ref={this.saveInput} type="text"/><br/>
               <button onClick={this.showInfo}>点我提示输入的数据</button>
               <button onClick={this.changeWeather}>点我切换天气</button>
