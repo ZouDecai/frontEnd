@@ -33,6 +33,26 @@
       }).then(value => {
         console.log(value);
       });
+
+      btns[1].onclick = function() {
+        axios.post('/axios-server', {
+          // url
+          params: {
+            id: 200,
+            vip: 9
+          },
+          // 请求头参数
+          headers: {
+            height: 180,
+            weight: 180,
+          },
+          // 请求体
+          data: {
+            username: 'admin',
+            password: 'admin'
+          }
+        })
+      }
     }
   </script>
 </body>
