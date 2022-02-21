@@ -82,6 +82,64 @@ app.all('/axios-server', (request, response) => {
   response.send(JSON.stringify(data));
 })
 
+// fetch 服务
+app.all('/fetch-server', (request, response) => {
+  // 设置响应头   设置允许跨域
+  response.setHeader('Access-Control-Allow-Origin', '*');
+  // 响应头
+  response.setHeader('Access-Control-Allow-Headers', '*');
+  // 设置响应体
+  // response.send('Hello jQuery AJAX');
+  const data = {name: '九乾'}
+  response.send(JSON.stringify(data));
+})
+
+// jsonp服务
+app.all('/jsonp-server', (request, response) => {
+  // response.send('console.log("hello jsonp")');
+  const data = {
+    name: '伟蓝正能'
+  };
+  // 将数据转化为字符串
+  let str = JSON.stringify(data);
+  // 返回结果
+  response.end(`handle(${str})`);
+})
+
+// 用户名检测是否存在
+app.all('/check-username', (request, response) => {
+  // response.send('console.log("hello jsonp")');
+  const data = {
+    exist: 1,
+    msg: '用户名已经存在'
+  };
+  // 将数据转化为字符串
+  let str = JSON.stringify(data);
+  // 返回结果
+  response.end(`handle(${str})`);
+})
+
+// 
+app.all('/jquery-jsonp-server', (request, response) => {
+  // response.send('console.log("hello jsonp")');
+  const data = {
+    name: '伟蓝正能',
+    city: ['北京', '深圳']
+  };
+  // 将数据转化为字符串
+  let str = JSON.stringify(data);
+  // 接收 callback参数
+  let cb = request.query.callback;
+  // 返回结果
+  response.end(`${cb}(${str})`);
+})
+
+app.all('/cors-server', (request, response) => {
+  // 设置响应头   设置允许跨域
+  response.setHeader('Access-Control-Allow-Origin', '*');
+  response.send('hello CORS');
+})
+
 // 4.监听端口启动服务
 app.listen(8000, () => {
   console.log("服务已经启动，8000端口监听中...")
