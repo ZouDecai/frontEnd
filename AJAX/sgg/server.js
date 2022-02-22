@@ -137,6 +137,8 @@ app.all('/jquery-jsonp-server', (request, response) => {
 app.all('/cors-server', (request, response) => {
   // 设置响应头   设置允许跨域
   response.setHeader('Access-Control-Allow-Origin', '*');
+  response.setHeader('Access-Control-Allow-Headers', '*');
+  response.setHeader('Access-Control-Allow-Method', '*');
   response.send('hello CORS');
 })
 
